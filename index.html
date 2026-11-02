@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#244d3b">
+<title>Frigo Furbo — Non buttare, reinventa!</title>
+<style>
+:root{--green:#244d3b;--green2:#3f7656;--mint:#e8f2e8;--cream:#fbf8ef;--ink:#26352c;--muted:#68766c;--orange:#e69a4b;--line:#e4e8df}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:var(--green);color:white;padding:22px max(22px,calc((100% - 1120px)/2));}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-weight:850;font-size:1.35rem;letter-spacing:-.04em}.brand span{color:#b9d9ae}
+nav a{color:#e7f1e8;text-decoration:none;margin-left:18px;font-size:.92rem}
+.hero{max-width:1120px;margin:auto;padding:52px 22px 38px;display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}
+.eyebrow{color:var(--green2);font-size:.78rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+h1{font-size:clamp(2.5rem,6vw,4.6rem);line-height:.99;letter-spacing:-.065em;margin:12px 0 18px;color:var(--green)}
+.hero p{font-size:1.1rem;line-height:1.65;color:var(--muted);max-width:590px}
+.hero-art{background:#e7efdf;border-radius:28px;min-height:250px;display:grid;place-items:center;font-size:6.5rem;position:relative;overflow:hidden}
+.hero-art small{position:absolute;bottom:18px;right:18px;background:white;color:var(--green);padding:9px 13px;border-radius:20px;font-size:.8rem;font-weight:700}
+main{max-width:1120px;margin:auto;padding:10px 22px 60px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:22px 0 16px}
+h2{font-size:1.65rem;letter-spacing:-.04em;margin:0;color:var(--green)}.sub{color:var(--muted);margin:7px 0 0;line-height:1.5}
+.panel{background:white;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:0 8px 26px #2948320a}
+.formgrid{display:grid;grid-template-columns:1.4fr .8fr .8fr auto;gap:10px}
+input,select,button{font:inherit}input,select{width:100%;border:1px solid #dce3d9;background:#fff;border-radius:12px;padding:12px;color:var(--ink);min-width:0}
+button{border:0;border-radius:12px;padding:12px 17px;background:var(--green);color:white;font-weight:750;cursor:pointer}
+button:hover{background:var(--green2)}button.secondary{background:var(--mint);color:var(--green)}button.ghost{background:#f4f5f0;color:var(--green);padding:8px 11px}
+.inventory{display:flex;flex-wrap:wrap;gap:9px;margin-top:17px}.chip{display:flex;align-items:center;gap:8px;background:var(--mint);color:var(--green);border-radius:30px;padding:8px 11px;font-size:.9rem;font-weight:650}.chip button{padding:0;background:transparent;color:var(--green);font-size:1rem}
+.empty{color:var(--muted);padding:12px 0}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.recipe{border:1px solid var(--line);border-radius:18px;background:white;padding:17px;display:flex;flex-direction:column;gap:10px}
+.recipe .emoji{font-size:2rem;background:#f1f5ed;width:58px;height:58px;display:grid;place-items:center;border-radius:16px}
+.recipe h3{margin:0;color:var(--green);font-size:1.08rem}.recipe p{margin:0;color:var(--muted);font-size:.92rem;line-height:1.5}.meta{font-size:.8rem;color:var(--green2);font-weight:750}.recipe button{margin-top:auto;align-self:flex-start}
+.tipgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.tip{background:#f0f4eb;border-radius:18px;padding:18px}.tip b{display:block;color:var(--green);margin:8px 0}.tip p{color:var(--muted);font-size:.92rem;line-height:1.5;margin:0}
+.notice{font-size:.83rem;color:var(--muted);line-height:1.55;margin-top:18px;padding:14px;border-left:3px solid var(--orange);background:#fffaf2;border-radius:0 12px 12px 0}
+footer{background:#edf2e9;padding:24px;text-align:center;color:var(--muted);font-size:.86rem}
+.modal{position:fixed;inset:0;background:#10201699;display:none;align-items:center;justify-content:center;padding:18px;z-index:5}.modal.show{display:flex}.modalbox{background:white;border-radius:20px;padding:24px;max-width:520px;width:100%;max-height:85vh;overflow:auto}.modalbox h3{color:var(--green);font-size:1.4rem;margin-top:0}.modalbox li{margin:9px 0;line-height:1.5}.modalbox .close{float:right}
+@media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:36px}.hero-art{min-height:170px;font-size:4.5rem}.formgrid{grid-template-columns:1fr 1fr}.formgrid input:first-child{grid-column:1/-1}.formgrid button{grid-column:1/-1}.cards,.tipgrid{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}nav a{margin:0 14px 0 0}.section-head{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="brand">🥬 FRIGO <span>FURBO</span></div><nav><a href="#frigo">Il mio frigo</a><a href="#ricette">Idee antispreco</a><a href="#consigli">Conservazione</a></nav></div></header>
+<section class="hero">
+ <div><div class="eyebrow">Cucina creativa · Meno sprechi</div><h1>Non buttare.<br>Reinventa!</h1><p>Hai pochi ingredienti in frigorifero? Inseriscili e scopri idee semplici per riutilizzarli, valorizzare gli avanzi e organizzare meglio la spesa.</p><a href="#frigo"><button>Apri il mio frigorifero ↓</button></a></div>
+ <div class="hero-art" aria-label="Illustrazione di alimenti"><span>🥕🥦🍅🫑</span><small>Ogni ingrediente può avere una seconda vita</small></div>
+</section>
+<main>
+<section id="frigo">
+ <div class="section-head"><div><div class="eyebrow">Partiamo da quello che hai</div><h2>🧊 Il mio frigorifero</h2><p class="sub">Aggiungi gli ingredienti: resteranno salvati su questo dispositivo.</p></div></div>
+ <div class="panel">
+  <form id="foodForm" class="formgrid">
+   <input id="foodName" placeholder="Es. zucchine, ricotta, pane..." required maxlength="40">
+   <input id="foodQty" placeholder="Quantità (es. 2)" maxlength="20">
+   <input id="foodDate" type="date" aria-label="Data di scadenza o da consumare entro">
+   <button type="submit">+ Aggiungi</button>
+  </form>
+  <div id="inventory" class="inventory"><div class="empty">Il frigorifero è vuoto: aggiungi il primo ingrediente!</div></div>
+ </div>
+</section>
+<section id="ricette">
+ <div class="section-head"><div><div class="eyebrow">Idee per recuperare gli ingredienti</div><h2>🍳 Cosa posso preparare?</h2><p class="sub">Le proposte si aggiornano in base a ciò che hai inserito.</p></div><button class="secondary" id="showAll">Mostra tutte</button></div>
+ <div id="recipes" class="cards"></div>
+</section>
+<section id="consigli">
+ <div class="section-head"><div><div class="eyebrow">Piccoli gesti, grande differenza</div><h2>🌿 Consigli antispreco</h2></div></div>
+ <div class="tipgrid">
+  <article class="tip"><div style="font-size:1.8rem">🥬</div><b>Verdure un po' appassite</b><p>Se sono ancora integre e adatte al consumo, puoi usarle in zuppe, minestroni, frittate o condimenti.</p></article>
+  <article class="tip"><div style="font-size:1.8rem">🍞</div><b>Pane del giorno prima</b><p>Se conservato correttamente e senza muffe, trasformalo in crostini, pangrattato o panzanella.</p></article>
+  <article class="tip"><div style="font-size:1.8rem">🧀</div><b>Piccoli avanzi di formaggio</b><p>Puoi grattugiarli o unirli a torte salate e ripieni, se il prodotto è ancora sicuro da mangiare.</p></article>
+  <article class="tip"><div style="font-size:1.8rem">🍚</div><b>Riso o pasta avanzati</b><p>Raffreddali rapidamente, conservali in frigorifero e riutilizzali presto in insalate o frittate di pasta.</p></article>
+  <article class="tip"><div style="font-size:1.8rem">🍌</div><b>Frutta molto matura</b><p>La frutta integra e non deteriorata può diventare frullato, composta o ingrediente per dolci.</p></article>
+  <article class="tip"><div style="font-size:1.8rem">📅</div><b>Organizza le priorità</b><p>Metti davanti gli alimenti da consumare prima e controlla regolarmente le date in etichetta.</p></article>
+ </div>
+ <div class="notice"><b>Attenzione alla sicurezza alimentare:</b> l'aspetto o l'odore non bastano sempre per stabilire se un alimento è sicuro. Rispetta le indicazioni in etichetta, la catena del freddo e le date di scadenza. Non recuperare alimenti con muffe o segni di deterioramento; per i prodotti con dicitura «da consumarsi entro» non superare la data indicata.</div>
+</section>
+</main>
+<footer>FRIGO FURBO · Meno sprechi, più idee 🍃<br>Prototipo gratuito: i dati inseriti restano nel browser di questo dispositivo.</footer>
+<div class="modal" id="modal"><div class="modalbox"><button class="ghost close" id="closeModal">Chiudi ✕</button><div id="modalContent"></div></div></div>
+<script>
+const recipes=[
+ {name:"Frittata svuotafrigo",emoji:"🍳",time:"20 min",items:["uova","zucchine","formaggio","spinaci","pomodori","patate"],desc:"Unisci uova e verdure già cotte o tagliate a pezzetti. Aggiungi un po' di formaggio e cuoci in padella.",steps:["Lava e taglia le verdure adatte al consumo.","Cuocile in padella finché sono tenere.","Sbatti le uova, aggiungi il formaggio e versa sulle verdure.","Cuoci a fuoco basso finché la frittata è ben rappresa."]},
+ {name:"Pasta creativa",emoji:"🍝",time:"15–25 min",items:["pasta","pomodori","zucchine","ricotta","formaggio","spinaci"],desc:"Un condimento semplice per valorizzare piccole quantità di verdure e formaggi.",steps:["Cuoci la pasta seguendo la confezione.","Salta le verdure in padella fino a completa cottura.","Aggiungi ricotta o formaggio adatto e un po' d'acqua di cottura.","Condisci la pasta e servi subito."]},
+ {name:"Zuppa salva-verdure",emoji:"🥣",time:"30 min",items:["carote","patate","zucchine","spinaci","sedano","pomodori"],desc:"Una zuppa calda per usare insieme diverse verdure ancora buone.",steps:["Controlla che le verdure siano integre e lavale.","Tagliale a pezzi e falle insaporire in pentola.","Aggiungi acqua o brodo e cuoci finché sono morbide.","Frulla in parte, se preferisci una consistenza cremosa."]},
+ {name:"Crostini e pane recuperato",emoji:"🥖",time:"10 min",items:["pane","formaggio","pomodori","olio"],desc:"Il pane del giorno prima può diventare una base croccante per un antipasto.",steps:["Taglia il pane a fette.","Tostalo in forno o in padella.","Aggiungi pomodoro e un filo d'olio oppure formaggio adatto.","Consuma appena pronto."]},
+ {name:"Insalata di riso svuotafrigo",emoji:"🥗",time:"15 min + raffreddamento",items:["riso","mais","pomodori","carote","formaggio","piselli"],desc:"Un piatto unico personalizzabile con ingredienti già disponibili.",steps:["Cuoci il riso e raffreddalo rapidamente.","Aggiungi verdure già cotte o ingredienti pronti e conservati correttamente.","Condisci e conserva in frigorifero fino al consumo.","Non lasciarlo a temperatura ambiente a lungo."]},
+ {name:"Frullato di frutta matura",emoji:"🍌",time:"5 min",items:["banana","mele","pera","fragole","yogurt"],desc:"Una colazione o merenda per usare frutta matura ma ancora integra.",steps:["Lava e prepara la frutta, eliminando le parti non integre.","Mettila nel frullatore con yogurt o acqua.","Frulla fino alla consistenza desiderata.","Consuma subito."]}
+];
+let foods=JSON.parse(localStorage.getItem("frigofurbo-foods")||"[]");
+let expanded=false;
+const $=id=>document.getElementById(id);
+function save(){localStorage.setItem("frigofurbo-foods",JSON.stringify(foods))}
+function renderFoods(){
+ const box=$("inventory");box.innerHTML="";
+ if(!foods.length){box.innerHTML='<div class="empty">Il frigorifero è vuoto: aggiungi il primo ingrediente!</div>'}
+ foods.forEach((f,i)=>{const chip=document.createElement("span");chip.className="chip";chip.textContent=f.name+(f.qty?" · "+f.qty:"")+(f.date?" · entro "+new Date(f.date+"T00:00:00").toLocaleDateString("it-IT"):"");
+ const del=document.createElement("button");del.type="button";del.setAttribute("aria-label","Rimuovi "+f.name);del.textContent="×";del.onclick=()=>{foods.splice(i,1);save();render()};chip.appendChild(del);box.appendChild(chip)});
+ renderRecipes();
+}
+function renderRecipes(){
+ const box=$("recipes");box.innerHTML="";
+ const names=foods.map(f=>f.name.toLowerCase());
+ const matched=recipes.map(r=>({...r,score:r.items.filter(item=>names.some(n=>n.includes(item)||item.includes(n))).length})).filter(r=>r.score>0).sort((a,b)=>b.score-a.score);
+ const list=expanded?recipes:matched;
+ if(!foods.length&&!expanded){box.innerHTML='<div class="panel empty">Aggiungi qualche ingrediente al tuo frigo per ricevere idee su misura.</div>';return}
+ if(!list.length){box.innerHTML='<div class="panel empty">Non ho ancora una ricetta abbinata. Prova ad aggiungere ingredienti come uova, zucchine, pane, pasta o pomodori.</div>';return}
+ list.forEach(r=>{const card=document.createElement("article");card.className="recipe";card.innerHTML=`<div class="emoji">${r.emoji}</div><div class="meta">${r.time} · ${r.score||0} ingredienti compatibili</div><h3>${r.name}</h3><p>${r.desc}</p><button type="button">Vedi come fare</button>`;card.querySelector("button").onclick=()=>openRecipe(r);box.appendChild(card)});
+}
+function openRecipe(r){$("modalContent").innerHTML=`<h3>${r.emoji} ${r.name}</h3><p>${r.desc}</p><b>Procedimento</b><ol>${r.steps.map(s=>`<li>${s}</li>`).join("")}</ol><p class="notice">Controlla sempre che gli ingredienti siano conservati correttamente e ancora adatti al consumo.</p>`;$("modal").classList.add("show")}
+function render(){renderFoods()}
+$("foodForm").addEventListener("submit",e=>{e.preventDefault();const name=$("foodName").value.trim();if(!name)return;foods.push({name,qty:$("foodQty").value.trim(),date:$("foodDate").value});save();$("foodForm").reset();render()});
+$("showAll").onclick=()=>{expanded=!expanded;$("showAll").textContent=expanded?"Mostra suggerite":"Mostra tutte";renderRecipes()};
+$("closeModal").onclick=()=>$("modal").classList.remove("show");
+$("modal").addEventListener("click",e=>{if(e.target===$("modal"))$("modal").classList.remove("show")});
+render();
+</script>
+</body>
+</html>
