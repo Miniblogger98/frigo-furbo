@@ -322,12 +322,7 @@ analyzeButton.addEventListener("click", async () => {
           added > 0
             ? `Fatto! Ho aggiunto ${added} alimenti al frigorifero.`
             : "Analisi completata: non ho trovato nuovi alimenti.";
-if (foods.length > 0) {
-  chefQuestion.value =
-    "Ho appena fotografato il frigorifero. Crea 3 ricette originali usando gli alimenti presenti nel mio inventario aggiornato. Indica quantità, tempi e procedimento.";
 
-  generateRecipesButton.click();
-}
       } catch (error) {
         photoStatus.textContent = "Errore: " + error.message;
       } finally {
