@@ -340,8 +340,10 @@ analyzeButton.addEventListener("click", async () => {
   } catch (error) {
     photoStatus.textContent = "Errore durante l'analisi della foto.";
     analyzeButton.disabled = false;
-  });
-const chefQuestion = document.getElementById("chefQuestion");
+  }
+});
+
+const chefQuestion= document.getElementById("chefQuestion");
 const generateRecipesButton = document.getElementById("generateRecipes");
 const chefStatus = document.getElementById("chefStatus");
 const chefMessages = document.getElementById("chefMessages");
