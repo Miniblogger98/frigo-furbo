@@ -365,7 +365,7 @@ function renderChefRecipes(recipes) {
     const image = document.createElement("img");
     image.src = "https://images.unsplash.com/photo-1547592180-85f173990554?w=900&auto=format&fit=crop";
     image.alt = recipe.name;
-    image.loading = "lazy";
+    image.loading = "eager";
     image.style.display = "block";
 image.style.minHeight = "200px";
 image.onerror = function() {
