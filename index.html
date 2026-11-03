@@ -349,24 +349,23 @@ const generateRecipesButton = document.getElementById("generateRecipes");
 const chefStatus = document.getElementById("chefStatus");
 const chefMessages = document.getElementById("chefMessages");
 
-generateRecipesButton.addEventListener("click", async () => {
-  const question = chefQuestion.value.trim();
+function addChefMessage(message, type) {
+  const div = document.createElement("div");
+  div.className = "chef-message " + type;
+  div.textContent = message;
+  chefMessages.appendChild(div);
+  chefMessages.scrollTop = chefMessages.scrollHeight;
+}
+
+async function askChef(question) {
+  question = question.trim();
 
   if (!question) {
     chefStatus.textContent = "Scrivi prima la tua domanda!";
     return;
   }
 
-  const addMessage = (message, type) => {
-    const div = document.createElement("div");
-    div.className = "chef-message " + type;
-    div.textContent = message;
-    chefMessages.appendChild(div);
-    chefMessages.scrollTop = chefMessages.scrollHeight;
-  };
-
-  addMessage(question, "chef-user");
-  chefQuestion.value = "";
+  addChefMessage(question, "chef-user");
   generateRecipesButton.disabled = true;
   chefStatus.textContent = "👨‍🍳 Gemini sta preparando la risposta...";
 
@@ -390,14 +389,23 @@ generateRecipesButton.addEventListener("click", async () => {
       throw new Error(result.error || "Errore nella risposta di Gemini.");
     }
 
-    addMessage(result.answer, "chef-bot");
+    addChefMessage(result.answer, "chef-bot");
     chefStatus.textContent = "Risposta pronta! Puoi continuare la conversazione.";
+
   } catch (error) {
     chefStatus.textContent = "Errore: " + error.message;
+
   } finally {
     generateRecipesButton.disabled = false;
   }
+}
+
+generateRecipesButton.addEventListener("click", () => {
+  const question = chefQuestion.value;
+  chefQuestion.value = "";
+  askChef(question);
 });
+  
 </script>
 </body>
 </html>
