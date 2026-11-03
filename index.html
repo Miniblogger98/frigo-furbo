@@ -363,8 +363,17 @@ function renderChefRecipes(recipes) {
     card.className = "chef-recipe";
 
     const image = document.createElement("img");
-    const keyword = recipe.name.split(" ").slice(0, 4).join(",");
-image.src = "https://loremflickr.com/900/550/" + encodeURIComponent(keyword) + "?lock=" + encodeURIComponent(recipe.name);
+    const recipeName = recipe.name.toLowerCase();
+
+if (recipeName.includes("pasta")) {
+  image.src = "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=900";
+} else if (recipeName.includes("frittata") || recipeName.includes("uova")) {
+  image.src = "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=900";
+} else if (recipeName.includes("zucchine") || recipeName.includes("verdure")) {
+  image.src = "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=900";
+} else {
+  image.src = "https://images.unsplash.com/photo-1547592180-85f173990554?w=900";
+}
     image.alt = recipe.name;
     image.loading = "eager";
     image.style.display = "block";
