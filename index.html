@@ -53,13 +53,14 @@ footer{background:#edf2e9;padding:24px;text-align:center;color:var(--muted);font
    <input id="foodQty" placeholder="Quantità (es. 2)" maxlength="20">
    <input id="foodDate" type="date" aria-label="Data di scadenza o da consumare entro">
    <button type="submit">+ Aggiungi</button>
-  </<div class="panel" style="margin-top:15px">
+  </form>
+<div class="panel" style="margin-top:15px">
   <h3>📸 Riconosci gli alimenti con una foto</h3>
   <p>Scatta una foto o scegli un'immagine del frigorifero.</p>
   <input id="fridgePhoto" type="file" accept="image/jpeg,image/png,image/webp" capture="environment">
   <button type="button" id="analyzePhoto">Analizza foto</button>
   <p id="photoStatus">Scegli una foto per iniziare.</p>
-</div>>
+</div>
   <div id="inventory" class="inventory"><div class="empty">Il frigorifero è vuoto: aggiungi il primo ingrediente!</div></div>
  </div>
 </section>
@@ -118,7 +119,7 @@ $("showAll").onclick=()=>{expanded=!expanded;$("showAll").textContent=expanded?"
 $("closeModal").onclick=()=>$("modal").classList.remove("show");
 $("modal").addEventListener("click",e=>{if(e.target===$("modal"))$("modal").classList.remove("show")});
 render();
-<const photoInput = document.getElementById("fridgePhoto");
+const photoInput = document.getElementById("fridgePhoto");
 const analyzeButton = document.getElementById("analyzePhoto");
 const photoStatus = document.getElementById("photoStatus");
 
