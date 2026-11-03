@@ -363,8 +363,7 @@ function renderChefRecipes(recipes) {
     card.className = "chef-recipe";
 
     const image = document.createElement("img");
-    image.src = "https://loremflickr.com/900/550/" +
-      encodeURIComponent(recipe.name + ",food");
+    image.src = "https://loremflickr.com/900/550/food";
     image.alt = recipe.name;
     image.loading = "lazy";
     card.appendChild(image);
