@@ -379,8 +379,9 @@ if (recipeName.includes("pasta")) {
     image.style.display = "block";
 image.style.minHeight = "200px";
 image.onerror = function() {
-  this.alt = "Immagine non disponibile";
-  this.style.display = "none";
+  this.alt = "Fotografia non disponibile";
+  this.style.display = "block";
+  this.style.minHeight = "200px";
 };
     card.appendChild(image);
 
