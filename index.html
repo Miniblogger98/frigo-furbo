@@ -81,6 +81,14 @@ footer{background:#edf2e9;padding:24px;text-align:center;color:var(--muted);font
  <div class="notice"><b>Attenzione alla sicurezza alimentare:</b> l'aspetto o l'odore non bastano sempre per stabilire se un alimento è sicuro. Rispetta le indicazioni in etichetta, la catena del freddo e le date di scadenza. Non recuperare alimenti con muffe o segni di deterioramento; per i prodotti con dicitura «da consumarsi entro» non superare la data indicata.</div>
 </section>
 </main>
+ <section class="panel" style="margin-top:20px">
+  <h2>👨‍🍳 Chef AI di FRIGO FURBO</h2>
+  <p>Chiedi a Gemini cosa preparare con gli ingredienti che hai in frigorifero.</p>
+  <textarea id="chefQuestion" rows="3" placeholder="Es. Ho broccoli, latte e limone: cosa posso cucinare?"></textarea>
+  <button type="button" id="generateRecipes">Genera ricette con Gemini</button>
+  <p id="chefStatus"></p>
+  <div id="chefResults" style="white-space:pre-wrap"></div>
+</section>
 <footer>FRIGO FURBO · Meno sprechi, più idee 🍃<br>Prototipo gratuito: i dati inseriti restano nel browser di questo dispositivo.</footer>
 <div class="modal" id="modal"><div class="modalbox"><button class="ghost close" id="closeModal">Chiudi ✕</button><div id="modalContent"></div></div></div>
 <script>
@@ -223,6 +231,51 @@ analyzeButton.addEventListener("click", async () => {
     photoStatus.textContent = "Errore durante l'analisi della foto.";
     analyzeButton.disabled = false;
   }
+const chefQuestion = document.getElementById("chefQuestion");
+const generateRecipesButton = document.getElementById("generateRecipes");
+const chefStatus = document.getElementById("chefStatus");
+const chefResults = document.getElementById("chefResults");
+
+generateRecipesButton.addEventListener("click", async () => {
+  const question = chefQuestion.value.trim();
+
+  if (!question) {
+    chefStatus.textContent = "Scrivi cosa vorresti cucinare.";
+    return;
+  }
+
+  generateRecipesButton.disabled = true;
+  chefStatus.textContent = "Gemini sta creando le tue ricette...";
+  chefResults.textContent = "";
+
+  try {
+    const response = await fetch(
+      "https://frigo-furbo-ai.chaimaabillai877.workers.dev/",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "chef",
+          question: question,
+          ingredients: foods.map(food => food.name)
+        })
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || "Errore nella creazione delle ricette.");
+    }
+
+    chefResults.textContent = result.answer;
+    chefStatus.textContent = "Ecco le tue ricette!";
+  } catch (error) {
+    chefStatus.textContent = "Errore: " + error.message;
+  } finally {
+    generateRecipesButton.disabled = false;
+  }
+});
 });</script>
 </body>
 </html>
