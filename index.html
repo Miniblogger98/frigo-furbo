@@ -44,6 +44,14 @@ footer{background:#edf2e9;padding:24px;text-align:center;color:var(--muted);font
  <div><div class="eyebrow">Cucina creativa · Meno sprechi</div><h1>Non buttare.<br>Reinventa!</h1><p>Hai pochi ingredienti in frigorifero? Inseriscili e scopri idee semplici per riutilizzarli, valorizzare gli avanzi e organizzare meglio la spesa.</p><a href="#frigo"><button>Apri il mio frigorifero ↓</button></a></div>
  <div class="hero-art" aria-label="Illustrazione di alimenti"><span>🥕🥦🍅🫑</span><small>Ogni ingrediente può avere una seconda vita</small></div>
 </section>
+  <section class="panel" style="margin-top:20px">
+  <h2>👨‍🍳 Chef AI di FRIGO FURBO</h2>
+  <p>Chiedi a Gemini cosa preparare con gli ingredienti che hai in frigorifero.</p>
+  <textarea id="chefQuestion" rows="3" placeholder="Es. Ho broccoli, latte e limone: cosa posso cucinare?"></textarea>
+  <button type="button" id="generateRecipes">Genera ricette con Gemini</button>
+  <p id="chefStatus"></p>
+  <div id="chefResults" style="white-space:pre-wrap"></div>
+</section>
 <main>
 <section id="frigo">
  <div class="section-head"><div><div class="eyebrow">Partiamo da quello che hai</div><h2>🧊 Il mio frigorifero</h2><p class="sub">Aggiungi gli ingredienti: resteranno salvati su questo dispositivo.</p></div></div>
@@ -81,14 +89,7 @@ footer{background:#edf2e9;padding:24px;text-align:center;color:var(--muted);font
  <div class="notice"><b>Attenzione alla sicurezza alimentare:</b> l'aspetto o l'odore non bastano sempre per stabilire se un alimento è sicuro. Rispetta le indicazioni in etichetta, la catena del freddo e le date di scadenza. Non recuperare alimenti con muffe o segni di deterioramento; per i prodotti con dicitura «da consumarsi entro» non superare la data indicata.</div>
 </section>
 </main>
- <section class="panel" style="margin-top:20px">
-  <h2>👨‍🍳 Chef AI di FRIGO FURBO</h2>
-  <p>Chiedi a Gemini cosa preparare con gli ingredienti che hai in frigorifero.</p>
-  <textarea id="chefQuestion" rows="3" placeholder="Es. Ho broccoli, latte e limone: cosa posso cucinare?"></textarea>
-  <button type="button" id="generateRecipes">Genera ricette con Gemini</button>
-  <p id="chefStatus"></p>
-  <div id="chefResults" style="white-space:pre-wrap"></div>
-</section>
+
 <footer>FRIGO FURBO · Meno sprechi, più idee 🍃<br>Prototipo gratuito: i dati inseriti restano nel browser di questo dispositivo.</footer>
 <div class="modal" id="modal"><div class="modalbox"><button class="ghost close" id="closeModal">Chiudi ✕</button><div id="modalContent"></div></div></div>
 <script>
