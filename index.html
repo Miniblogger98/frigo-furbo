@@ -348,7 +348,82 @@ const chefQuestion = document.getElementById("chefQuestion");
 const generateRecipesButton = document.getElementById("generateRecipes");
 const chefStatus = document.getElementById("chefStatus");
 const chefMessages = document.getElementById("chefMessages");
+const chefResults = document.getElementById("chefResults");
 
+function renderChefRecipes(recipes) {
+  chefResults.innerHTML = "";
+
+  if (!Array.isArray(recipes) || recipes.length === 0) {
+    chefResults.textContent = "Non ho trovato ricette. Riprova!";
+    return;
+  }
+
+  recipes.forEach(recipe => {
+    const card = document.createElement("div");
+    card.className = "chef-recipe";
+
+    const image = document.createElement("img");
+    image.src = "https://loremflickr.com/900/550/" +
+      encodeURIComponent(recipe.name + ",food");
+    image.alt = recipe.name;
+    image.loading = "lazy";
+    card.appendChild(image);
+
+    const title = document.createElement("h2");
+    title.textContent = recipe.name;
+    card.appendChild(title);
+
+    const description = document.createElement("p");
+    description.textContent = recipe.description || "";
+    card.appendChild(description);
+
+    const details = document.createElement("p");
+    details.textContent =
+      "⏱ Preparazione: " + recipe.preparationTime +
+      " | Cottura: " + recipe.cookingTime +
+      " | Difficoltà: " + recipe.difficulty +
+      " | Porzioni: " + recipe.servings;
+    card.appendChild(details);
+
+    const ingredientsTitle = document.createElement("h3");
+    ingredientsTitle.textContent = "🥗 Ingredienti";
+    card.appendChild(ingredientsTitle);
+
+    const ingredientsList = document.createElement("ul");
+
+    (recipe.ingredients || []).forEach(item => {
+      const li = document.createElement("li");
+      li.textContent =
+        item.name + " – " + item.quantity +
+        (item.available ? " ✓ Disponibile" : " – Da acquistare");
+      ingredientsList.appendChild(li);
+    });
+
+    card.appendChild(ingredientsList);
+
+    const stepsTitle = document.createElement("h3");
+    stepsTitle.textContent = "👨‍🍳 Procedimento";
+    card.appendChild(stepsTitle);
+
+    const stepsList = document.createElement("ol");
+
+    (recipe.steps || []).forEach(step => {
+      const li = document.createElement("li");
+      li.textContent = step;
+      stepsList.appendChild(li);
+    });
+
+    card.appendChild(stepsList);
+
+    if (recipe.tip) {
+      const tip = document.createElement("p");
+      tip.textContent = "💡 Consiglio antispreco: " + recipe.tip;
+      card.appendChild(tip);
+    }
+
+    chefResults.appendChild(card);
+  });
+}
 function addChefMessage(message, type) {
   const div = document.createElement("div");
   div.className = "chef-message " + type;
@@ -389,7 +464,7 @@ async function askChef(question) {
       throw new Error(result.error || "Errore nella risposta di Gemini.");
     }
 
-    addChefMessage(result.answer, "chef-bot");
+    renderChefRecipes(result.recipes);
     chefStatus.textContent = "Risposta pronta! Puoi continuare la conversazione.";
 
   } catch (error) {
