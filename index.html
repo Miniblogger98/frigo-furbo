@@ -363,7 +363,8 @@ function renderChefRecipes(recipes) {
     card.className = "chef-recipe";
 
     const image = document.createElement("img");
-    image.src = "https://images.unsplash.com/photo-1547592180-85f173990554?w=900&auto=format&fit=crop";
+    const keyword = recipe.name.split(" ").slice(0, 4).join(",");
+image.src = "https://loremflickr.com/900/550/" + encodeURIComponent(keyword) + "?lock=" + encodeURIComponent(recipe.name);
     image.alt = recipe.name;
     image.loading = "eager";
     image.style.display = "block";
