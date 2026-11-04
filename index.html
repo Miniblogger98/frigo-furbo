@@ -388,8 +388,12 @@ fetch("https://frigo-furbo-ai.chaimaabillai877.workers.dev/", {
 })
 .then(response => response.json())
 .then(result => {
+  console.log("RISPOSTA IMMAGINE:", result);
+
   if (result.ok && result.dataURI) {
     image.src = result.dataURI;
+  } else {
+    console.error("ERRORE IMMAGINE:", result);
   }
 })
 .catch(error => {
